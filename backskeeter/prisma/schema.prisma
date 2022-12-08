@@ -1,3 +1,5 @@
+
+
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
@@ -9,3 +11,28 @@ datasource db {
   provider = "mongodb"
   url      = env("DATABASE_URL")
 }
+
+
+model User {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  userEmail   String   @unique
+  strikes     String?
+  isBanned    DateTime     
+  isDeleted   DateTime
+  
+}
+
+model Post{
+  id          String @id @default(auto()) @map("_id") @db.ObjectId
+  title       String
+  tags        String[]
+  author      String
+  isPosted    Boolean
+}
+
+model Tags{
+  id        String @id @default(auto()) @map("_id") @db.ObjectId
+  name      String
+}
+
+
