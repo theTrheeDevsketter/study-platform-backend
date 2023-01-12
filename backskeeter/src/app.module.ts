@@ -6,10 +6,13 @@ import { AppService } from './app.service';
 import appConfig from './config/app.config';
 
 @Module({
-  imports: [ConfigModule.forRoot({
-    isGlobal: true,
-    load: [appConfig]
-  }),  GithubModule],
+  imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+      load: [appConfig],
+    }),
+    GithubModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
