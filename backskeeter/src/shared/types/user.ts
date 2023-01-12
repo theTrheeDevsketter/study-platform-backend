@@ -1,16 +1,15 @@
-import { AuthProvider } from './auth'; 
-
+import { AuthProvider } from './auth';
 
 export interface User {
-    id: string;
+  id: string;
 
-    provider: AuthProvider;
+  provider: AuthProvider;
 
-    providerId: string;
+  providerId: string;
 
-    displayName: string;
+  displayName: string;
 
-    photos: {
-        value: string;
-    }[];
+  photos: {
+    value: string;
+  }[];
 }

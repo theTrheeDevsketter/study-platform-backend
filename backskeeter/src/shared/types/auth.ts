@@ -1,13 +1,13 @@
 export type AuthProvider = 'github';
 
 export type JwtPayload = {
-    sub: string;
+  sub: string;
 
-    iat?: number;
+  iat?: number;
 
-    exp?: number;
+  exp?: number;
 
-    displayName: string;
+  displayName: string;
 
-    photo?: string;
-}
+  photo?: string;
+};

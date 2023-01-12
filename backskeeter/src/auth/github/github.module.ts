@@ -7,6 +7,6 @@ import { Module } from '@nestjs/common';
 @Module({
   imports: [JwtAuthModule, UsersModule],
   controllers: [GithubOauthController],
-  providers: [GithubOauthStrategy]
+  providers: [GithubOauthStrategy],
 })
 export class GithubModule {}
