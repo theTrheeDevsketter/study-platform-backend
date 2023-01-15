@@ -17,7 +17,7 @@ export class PostsController {
   async getPost(
     @Param('pages') pages: number,
     @Param('limit') limit: number,
-  ): Promise<Posti> {
+  ): Promise<Posti[]> {
     return this.postService.getPost(pages, limit);
   }
 
@@ -26,18 +26,21 @@ export class PostsController {
     @Param('userId') userId: string,
     @Param('pages') pages: number,
     @Param('limit') limit: number,
-  ): Promise<Posti> {
+  ): Promise<Posti[]> {
     return this.postService.getPostByUser(userId, pages, limit);
   }
 
   @Post()
   async createPost(@Body() newPost: Posti): Promise<Posti> {
-    return this.postService.create(newPost);
-  } 
+    return this.postService.save(newPost);
+  }
 
   @Put('id')
-  async updatePost(@Param('id') id: string, @Body() updatedPost: Posti): Promise<Posti> {
-    return this.postService.update(id, updatedPost);
+  async updatePost(
+    @Param('id') id: string,
+    @Body() updatedPost: Posti,
+  ): Promise<Posti> {
+    return this.postService.save(updatedPost, id);
   }
 
   @Delete('id')

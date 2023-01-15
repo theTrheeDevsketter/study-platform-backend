@@ -14,8 +14,26 @@ export class TagsService {
   }
 
   async createTag(data: Prisma.TagsCreateInput): Promise<Tags> {
-   return this.prisma.tags.create({
+    return this.prisma.tags.create({
       data,
+    });
+  }
+
+  async deleteTag(id: string): Promise<Tags> {
+    return this.prisma.tags.delete({
+      where: {
+        id,
+      },
+    });
+  }
+  async updateTag(id: string, name: string): Promise<Tags> {
+    return this.prisma.tags.update({
+      data: {
+        name,
+      },
+      where: {
+        id,
+      },
     });
   }
 }
