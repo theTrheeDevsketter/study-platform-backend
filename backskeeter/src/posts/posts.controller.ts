@@ -7,7 +7,7 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
-import { Posti } from '@prisma/client';
+import { Posti, Prisma } from '@prisma/client';
 import { PostsService } from './posts.service';
 
 @Controller('posts')
@@ -23,11 +23,11 @@ export class PostsController {
 
   @Get('user')
   async getPostByUser(
-    @Param('userId') userId: string,
+    @Param('user') user: string,
     @Param('pages') pages: number,
     @Param('limit') limit: number,
   ): Promise<Posti[]> {
-    return this.postService.getPostByUser(userId, pages, limit);
+    return this.postService.getPostByUser(user, pages, limit);
   }
 
   @Post()
@@ -35,16 +35,20 @@ export class PostsController {
     return this.postService.save(newPost);
   }
 
-  @Put('id')
+  @Put(':id')
   async updatePost(
     @Param('id') id: string,
     @Body() updatedPost: Posti,
   ): Promise<Posti> {
-    return this.postService.save(updatedPost, id);
+    console.log(id);
+    
+    return this.postService.update(updatedPost, id);
   }
 
-  @Delete('id')
+  @Delete(':id')
   async deletePost(@Param('id') id: string): Promise<Posti> {
+    console.log(id);
+
     return this.postService.delete(id);
   }
 }

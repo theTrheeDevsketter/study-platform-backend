@@ -13,30 +13,31 @@ export class PostsService {
       },
     });
   }
-  save(updatedPost: Posti, id?: string): Promise<Posti> {
-    return this.prisma.posti.upsert({
-      create: {
-        author: updatedPost.author,
-        isPosted: false,
-        title: updatedPost.title,
-        tags: updatedPost.tags,
-      },
-      update: {
-        ...updatedPost,
-      },
-      where: {
-        id,
-      },
+  save(data: Prisma.PostiCreateInput): Promise<Posti> {
+    
+    return this.prisma.posti.create({
+      data
     });
   }
+
+  update(data: Prisma.PostiUpdateInput, id: string): Promise<Posti> {
+    
+    return this.prisma.posti.update({
+      where: {
+        id
+      },
+      data
+    });
+  }
+
   getPostByUser(
-    userId: string,
+    user: string,
     pages: number,
     limit: number,
   ): Promise<Posti[]> {
     return this.prisma.posti.findMany({
       where: {
-        id: userId,
+        author: user,
       },
       take: pages,
     });
