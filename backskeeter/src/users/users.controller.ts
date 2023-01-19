@@ -13,7 +13,7 @@ import { UsersService } from './users.service';
 @Controller('users')
 export class UsersController {
   constructor(private readonly userService: UsersService) {}
-  @Get()
+  @Get('pages=:pages&limit=:limit')
   async getUser(
     @Param('pages') pages: number,
     @Param('limit') limit: number,
@@ -21,18 +21,18 @@ export class UsersController {
     return this.userService.getUser(pages, limit);
   }
 
-  @Post('/create')
-  async saveUser(@Body() user: User): Promise<User> {
-    return this.userService.saveUser(user);
-  }
+  // @Post()
+  // async saveUser(@Body() user: User): Promise<User> {
+  //   return this.userService.saveUser(user);
+  // }
 
-  @Delete('/delete')
+  @Delete('delete=:id')
   async deleteUser(@Param('id') id: string): Promise<User> {
     return this.userService.deleteUser(id);
   }
 
-  @Put('/update')
-  async updateUser(@Body() user: User): Promise<User> {
-    return this.userService.saveUser(user);
-  }
+  // @Put()
+  // async updateUser(@Body() user: User): Promise<User> {
+  //   return this.userService.saveUser(user);
+  // }
 }

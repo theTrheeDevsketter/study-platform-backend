@@ -13,11 +13,19 @@ datasource db {
 }
 
 model User {
-  id          String   @id @default(auto()) @map("_id") @db.ObjectId
-  userEmail   String   @unique
-  strikes     String?
-  isBanned    DateTime     
-  isDeleted   DateTime
+  id                String   @id @default(auto()) @map("_id") @db.ObjectId
+  githubId          String   @unique
+  userName          String   @unique
+  profileUrl        String?
+  avatar_url        String?
+  blog              String?
+  location          String?
+  twitter_username  String?
+  public_repos      String?
+  public_gist       String?
+  strikes           String?
+  isBanned          DateTime     
+  isDeleted         DateTime
   
 }
 

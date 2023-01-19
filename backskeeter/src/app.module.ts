@@ -8,6 +8,7 @@ import { PrismaService } from './prisma/prisma.service';
 import { TagsService } from './tags/tags.service';
 import { UsersController } from './users/users.controller';
 import { UsersService } from './users/users.service';
+import { UsersModule } from './users/users.module';
 import appConfig from './config/app.config';
 
 @Module({
@@ -17,6 +18,7 @@ import appConfig from './config/app.config';
       load: [appConfig],
     }),
     GithubModule,
+    UsersModule,
   ],
   controllers: [AppController, TagsController, UsersController],
   providers: [AppService, PrismaService, TagsService, UsersService],
