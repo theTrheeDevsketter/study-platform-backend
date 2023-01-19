@@ -32,14 +32,15 @@ export class PostsService {
 
   getPostByUser(
     user: string,
-    pages: number,
-    limit: number,
+    pages: string,
+    limit: string,
   ): Promise<Posti[]> {
+    const pagesNum = parseInt(pages)
     return this.prisma.posti.findMany({
       where: {
         author: user,
       },
-      take: pages,
+      take: pagesNum,
     });
   }
   getPost(pages: number, limit: number): Promise<Posti[]> {

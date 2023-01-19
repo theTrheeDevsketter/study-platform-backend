@@ -21,11 +21,11 @@ export class PostsController {
     return this.postService.getPost(pages, limit);
   }
 
-  @Get('user')
+  @Get('user=:user&pages=:pages&limit=:limit')
   async getPostByUser(
     @Param('user') user: string,
-    @Param('pages') pages: number,
-    @Param('limit') limit: number,
+    @Param('pages') pages: string,
+    @Param('limit') limit: string,
   ): Promise<Posti[]> {
     return this.postService.getPostByUser(user, pages, limit);
   }
@@ -40,15 +40,11 @@ export class PostsController {
     @Param('id') id: string,
     @Body() updatedPost: Posti,
   ): Promise<Posti> {
-    console.log(id);
-    
     return this.postService.update(updatedPost, id);
   }
 
   @Delete(':id')
   async deletePost(@Param('id') id: string): Promise<Posti> {
-    console.log(id);
-
     return this.postService.delete(id);
   }
 }
