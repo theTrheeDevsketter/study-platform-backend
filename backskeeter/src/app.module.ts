@@ -9,6 +9,8 @@ import { TagsService } from './tags/tags.service';
 import { UsersController } from './users/users.controller';
 import { UsersService } from './users/users.service';
 import { UsersModule } from './users/users.module';
+import { PostsController } from './posts/posts.controller';
+import { PostsService } from './posts/posts.service';
 import appConfig from './config/app.config';
 
 @Module({
@@ -19,8 +21,8 @@ import appConfig from './config/app.config';
     }),
     GithubModule,
     UsersModule,
-  ],
-  controllers: [AppController, TagsController, UsersController],
-  providers: [AppService, PrismaService, TagsService, UsersService],
+  ]
+  controllers: [AppController, TagsController, PostsController, UsersController],
+  providers: [AppService, PrismaService, TagsService, PostsService, UsersService],
 })
 export class AppModule {}
