@@ -1,73 +1,58 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# Backsketters
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
-  
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+La finalidad de este proyecto es proveer distintos tipos de funcionalidades para para la aplicacion web que va a servir de punto de apoyo para todos esos alumnos que esten en ciclos o cursos relacionados con la programacion
 
-## Description
+## Indice del documento
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+1. [🗼 Estructura del proyecto 🗼](#Estructura)
+2. [🖌️ modelado de entidades 🖌️](#Modelado)
+3. [👩‍💻 tecnologías 👩‍💻](#Tecnología)
 
-## Installation
 
-```bash
-$ npm install
-```
+### Estructura
+El proyecto esta montado sobre un framework que usa `node` como base, `Nest`. Esto nos obliga a trabajar con un diseño de carpetas y archivos determinados por el mismo framework, miremos un poco en detalle como funciona un poco el flujo de la api.
 
-## Running the app
+1. Se ataca a un endpoint
+2. establecemos las reglas minimas para acceder al servicio
+  - middlewares
+  - guards
+  - pipes
+  - strategy
+3. pasado el filtro y/o transformaciones pertinentes, realizamos el servicio. Este se identifica normalmente con el nombre de la entidad a la que hace referencia
+4. Al ser una Rest-API todo endpoint al menos debe devolver un codigo de estatus. Algo General seria:
+  - 200 , todo ok 👌
+  - 300 , redirect 🔄
+  - 400 , fallo de algun tipo con la peticion ⚠️
+  - 500 , server error 🔥
 
-```bash
-# development
-$ npm run start
+El proyecto tiene 2 carpetas principales
+- `src`, aqui vamos a tener toda la logica de la aplicacion
+- `prisma`, aqui vamos a definir desde nuestro modelos y relaciones como la conexion con la bbdd
 
-# watch mode
-$ npm run start:dev
+#### src
+Dentro de source podemos diferenciar carpetas principales y 2 archivos importantes, hay mas pero nos vamos a centrar en estos:
+- carpetas
+  - auth : definir reglas para securizar los endpoints
+  - config : establecer interfaces generales de la app
+  - Entidades : carpetas con diversos archivos para modelar entidades y generar los servicios asociados
+- archivos
+  - app.module.ts : archivo donde se cargan los modulos que vamos a usar a lo largo de la app.
+  - main.ts : Punto de inicio donde se define entre otras cosas el puerto de escucha de la app
+### Modelado
 
-# production mode
-$ npm run start:prod
-```
+Definimos primero las entidades en el archivo de configuracion de prisma `schema.prisma`
 
-## Test
+una vez establecidas las entidades y sus relaciones, necesitamos decirle al ORM `Prisma` que genere un nuevo servicio con las entidades que hemos generados.
 
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+npx prisma generate
 ```
+Ahora solo nos queda usar el servicio de prisma en donde lo necesitemos.
+### Tecnología
 
-## Support
+En este proyecto hemos usado 2 tecnologias que se salian de nuestra zona de confor
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+- Nest : un framework de node para el diseño de aplicaciones del lado del servidor con javascript
+- Prisma : un ORM para manejar la capa de persistencia de nuestra app.
 
-## Stay in touch
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-  Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
