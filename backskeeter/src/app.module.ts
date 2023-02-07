@@ -21,7 +21,7 @@ import appConfig from './config/app.config';
     }),
     GithubModule,
     UsersModule,
-  ]
+  ],
   controllers: [AppController, TagsController, PostsController, UsersController],
   providers: [AppService, PrismaService, TagsService, PostsService, UsersService],
 })
