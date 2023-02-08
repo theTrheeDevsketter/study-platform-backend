@@ -32,6 +32,7 @@ model User {
 model Posti{
   id          String @id @default(auto()) @map("_id") @db.ObjectId
   title       String
+  content     String
   tags        String[]
   author      String
   isPosted    Boolean
