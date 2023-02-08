@@ -18,7 +18,7 @@ export class UsersController {
     @Param('pages') pages: number,
     @Param('limit') limit: number,
   ): Promise<User[]> {
-    return this.userService.getUser(pages, limit);
+    return this.userService.getUser(Number(pages), Number(limit));
   }
 
   // @Post()
