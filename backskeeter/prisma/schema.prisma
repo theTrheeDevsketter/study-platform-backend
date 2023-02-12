@@ -36,6 +36,7 @@ model Posti{
   tags        String[]
   author      String
   isPosted    Boolean
+  avatarImg   String
 }
 
 model Tags{

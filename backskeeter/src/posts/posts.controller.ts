@@ -3,6 +3,7 @@ import {
   Controller,
   Delete,
   Get,
+  Logger,
   Param,
   Post,
   Put,
@@ -18,6 +19,7 @@ export class PostsController {
     @Param('pages') pages: number,
     @Param('limit') limit: number,
   ): Promise<Posti[]> {
+    Logger.debug('he sido fecheado', 'Post Controller');
     return this.postService.getPost(pages, limit);
   }
 
