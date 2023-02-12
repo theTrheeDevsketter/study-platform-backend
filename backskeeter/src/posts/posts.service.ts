@@ -48,4 +48,7 @@ export class PostsService {
       take: pages,
     });
   }
+  getPostById(id: string): Promise<Posti> {
+    return this.prisma.posti.findFirst({ where: { id } });
+  }
 }

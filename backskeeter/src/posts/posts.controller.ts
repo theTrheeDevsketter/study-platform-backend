@@ -23,6 +23,11 @@ export class PostsController {
     return this.postService.getPost(pages, limit);
   }
 
+  @Get(':id')
+  async getPostById(@Param('id') id: string): Promise<Posti> {
+    return this.postService.getPostById(id);
+  }
+
   @Get('user=:user&pages=:pages&limit=:limit')
   async getPostByUser(
     @Param('user') user: string,
