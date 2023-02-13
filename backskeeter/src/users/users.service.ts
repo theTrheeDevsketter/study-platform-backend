@@ -1,8 +1,9 @@
-import { AuthProvider } from './../shared/types/auth';
+// import { AuthProvider } from './../shared/types/auth';
 import { Injectable } from '@nestjs/common';
 import { User } from '@prisma/client';
-import { PrismaService } from 'src/prisma/prisma.service';
 import { Profile } from 'passport-github';
+import { PrismaService } from 'src/prisma/prisma.service';
+
 // import { profile } from 'console';
 
 @Injectable()
@@ -39,34 +40,22 @@ export class UsersService {
   //   });
   // }
 
-  async findOrCreate(githubId: string, provider: AuthProvider, profile: Profile ) {
-
+  async findOrCreate({ userName, avatar_url }: User) {
     const user = await this.prisma.user.findFirst({
       where: {
-        githubId
-      }
+        userName,
+      },
     });
-
-    if(user){
+    if (user) {
       return user;
-    }else{
+    } else {
       return this.prisma.user.create({
-        data:{
-          githubId,
-          userName: profile.username,
-          profileUrl: profile.profileUrl,         
-          avatar_url: profile._json.avatar_url,         
-          blog: profile._json.blog,
-          location: profile._json.location,
-          twitter_username: profile._json.twitter_username,
-          public_repos: profile._json.public_repos.toString(),
-          public_gist: profile._json.public_gist,
-          strikes: null,
-          isBanned: new Date(),
-          isDeleted: new Date(),
-        }
-      })
+        data: {
+          role: 'user',
+          userName,
+          avatar_url,
+        },
+      });
     }
-    return null;
   }
 }
