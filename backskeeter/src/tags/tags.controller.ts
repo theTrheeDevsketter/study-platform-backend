@@ -14,7 +14,7 @@ import { TagsService } from './tags.service';
 export class TagsController {
   constructor(private readonly tagsService: TagsService) {}
   @Get()
-  async getOneTag(): Promise<Tags> {
+  async getOneTag(): Promise<Tags[]> {
     return this.tagsService.tag();
   }
 

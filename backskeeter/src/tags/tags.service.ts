@@ -6,11 +6,8 @@ import { PrismaService } from 'src/prisma/prisma.service';
 export class TagsService {
   constructor(private prisma: PrismaService) {}
 
-  async tag(): Promise<Tags> {
-    return {
-      id: '121',
-      name: 'kaka',
-    };
+  async tag(): Promise<Tags[]> {
+    return this.prisma.tags.findMany();
   }
 
   async createTag(data: Prisma.TagsCreateInput): Promise<Tags> {
