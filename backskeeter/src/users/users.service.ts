@@ -1,5 +1,5 @@
 // import { AuthProvider } from './../shared/types/auth';
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { User } from '@prisma/client';
 import { Profile } from 'passport-github';
 import { PrismaService } from 'src/prisma/prisma.service';
@@ -41,6 +41,7 @@ export class UsersService {
   // }
 
   async findOrCreate({ userName, avatar_url }: User) {
+    Logger.log(`user ${userName}`, 'User Controller findOrCreate');
     const user = await this.prisma.user.findFirst({
       where: {
         userName,
