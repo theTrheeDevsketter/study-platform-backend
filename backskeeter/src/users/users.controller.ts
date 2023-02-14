@@ -21,10 +21,10 @@ export class UsersController {
     return this.userService.getUser(Number(pages), Number(limit));
   }
 
-  // @Post()
-  // async saveUser(@Body() user: User): Promise<User> {
-  //   return this.userService.saveUser(user);
-  // }
+  @Post()
+  async saveUser(@Body() user: User): Promise<User> {
+    return this.userService.findOrCreate(user);
+  }
 
   @Delete('delete=:id')
   async deleteUser(@Param('id') id: string): Promise<User> {
